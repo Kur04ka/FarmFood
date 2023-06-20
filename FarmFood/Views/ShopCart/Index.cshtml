@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="background_personal_profile">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/git/pages/styles/style_personal_profile.css">
+    <link rel="stylesheet" href="~/git/pages/styles/style_shopping_cart.css">
+    <link rel="stylesheet" href="~/git/for_js_scripts/css_for_js/modal_search.css">
+    <link rel="stylesheet" href="~/git/for_js_scripts/css_for_js/modal_categories.css">
+    <link rel="icon" href="~/git/pages/images/farmfood_logo.svg" type="image/x-icon">
+    <title>Корзина</title>
+</head>
+<body style="position: absolute;">
+    <div class="init_app_navigation">
+        <div id="website_name" onclick="location.href='/'">Farmfood</div>
+        <div class="panel_app_navigation">
+            <img src="~/git/pages/images/magnifier.png">
+            <input type="button" value="Поиск" id="search">
+            <input type="button" value="Каталог" id="categories">
+            <input type="button" value="Корзина" onclick="location.href='/ShopCart/Index'">
+            <input type="button" value="Личный кабинет" onclick="location.href='/Account/PersonalProfile'">
+        </div>
+        <input id="last_button" type="button" value="Разместить объявление" onclick="location.href='/Products/NewAdvertisementCategory'">
+    </div>
+    <div class="main_panel">
+        <div class="page_title">Корзина</div>
+        <div class="product_panels">
+                @{  
+                    foreach (var item in Model.GetItemsFromCart())
+                    {
+                    <div class="product_panel">
+                        <div class="product_panel_info">
+                            <div class="product_image">
+                                <img src="@item.product.img" onclick="location.href='/Products/ProductInformation/@item.product.id'">
+                            </div>
+                            <p>@item.product.name</p>
+                            <div class="quantity_product">
+                                <input class="minus" type="image" src="~/git/pages/images/minus.svg" onclick="location.href='/ShopCart/RemoveOne/@item.id'">
+                                <p>@item.quantity @item.product.unitOfMeasure</p>
+                                <input class="plus" type="image" src="~/git/pages/images/plus.svg" onclick="location.href='/ShopCart/AddOne/@item.id'">
+                            </div>
+                            <p>@item.product.price руб./@item.product.unitOfMeasure</p>
+                            <p>@(item.product.price * item.quantity) руб.</p>
+                            <input type="image" src="~/git/pages/images/exit.svg" onclick="location.href='/ShopCart/RemoveItem/@item.id'">
+                        </div>
+                        <div class="payment_amount_panel">
+                            <p>К оплате:</p>
+                            <p>@(item.product.price * item.quantity) руб.</p>
+                            <input type="button" value="Связаться с продавцом" onclick="location.href='/Products/LinkToSeller/@item.product.sellerEmail'">
+                        </div>
+                    </div>
+                    }
+                }
+        </div>
+    </div>
+    <script>
+        for (let btn_remove of document.querySelectorAll('.product_panel_info > input')) {
+            btn_remove.addEventListener('click', (e) => {
+                e.target.closest('.product_panel').remove()
+            })
+        }
+    </script>
+    <script src="~/git/for_js_scripts/modal.js"></script>
+    <script src="~/git/for_js_scripts/create_modal_windows.js"></script>
+    <script src="~/git/for_js_scripts/quantity_change.js"></script>
+</body>
+</html>

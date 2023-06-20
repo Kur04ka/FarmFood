@@ -1,0 +1,28 @@
+﻿@model FarmFood.ViewModels.Authorization.RegisterViewModel
+
+<!DOCTYPE html>
+<html lang="en" class="background_initial_registration">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/git/pages/styles/style_initial_registration.css" rel="stylesheet">
+    <link rel="icon" href="~/git/pages/images/farmfood_logo.svg" type="image/x-icon">
+    <title>Создание учетной записи</title>
+</head>
+<body>
+    <form class="form" asp-action="Register" asp-controller="Account" asp-anti-forgery="true" method="post">
+        <div class="form_text_registration">Создание учетной записи</div>
+            <ul class="form_input">
+                <li><input type="email" id="email" asp-for="Email" placeholder="Введите адрес электронной почты"><span asp-validation-for="Email" required data-filled="true" /></li>
+                <li><input type="tel" id="phone" asp-for="PhoneNumber" placeholder="Введите номер телефона"><span asp-validation-for="PhoneNumber" required data-filled="true" /></li>
+                <li><input type="text" id="secondname" asp-for="LastName" placeholder="Введите фамилию"><span asp-validation-for="LastName" required data-filled="true" /></li>
+                <li><input type="text" id="firstname" asp-for="FirstName" placeholder="Введите имя"><span asp-validation-for="FirstName" required data-filled="true" /></li>
+                <li><input type="text" id="first_password" asp-for="Password" placeholder="Введите пароль"><span asp-validation-for="Password" required data-filled="true" /></li>
+                <li><input type="text" id="second_password" asp-for="ConfirmPassword" placeholder="Повторите пароль"><span asp-validation-for="ConfirmPassword" required data-filled="true" /></li>
+            </ul>
+        <input class="form_button" type="submit" value="Создать учетную запись">
+    </form>
+    <script src="~/git/for_js_scripts/data_validity/data_validity_create_account.js"></script>
+</body>
+</html>

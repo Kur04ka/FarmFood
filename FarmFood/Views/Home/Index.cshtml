@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="background_image">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/git/pages/styles/style_main_page.css">
+    <link rel="stylesheet" href="~/git/for_js_scripts/css_for_js/modal_search.css">
+    <link rel="stylesheet" href="~/git/for_js_scripts/css_for_js/modal_categories.css">
+    <link rel="icon" href="~/git/pages/images/farmfood_logo.svg" type="image/x-icon">
+    <title>Главная страница</title>
+</head>
+<body>
+    <div class="init_app_navigation">
+        <div id="website_name" onclick="location.href='/'">Farmfood</div>
+        <div class="panel_app_navigation">
+            <img src="~/git/pages/images/magnifier.png">
+            <input type="button" value="Поиск" id="search">
+            <input type="button" value="Каталог" id="categories">
+            <input type="button" value="Корзина" onclick="location.href='/ShopCart/'">
+            <input type="button" value="Личный кабинет" onclick="location.href='/Account/PersonalProfile'" />
+        </div>
+        <input id="last_button" type="button" value="Разместить объявление" onclick="location.href='/Products/NewAdvertisementCategory'">
+    </div>
+    <div class="main_panel">
+        <p>Категории товаров</p>
+        <div class="category_panel"></div>
+    </div>
+    <script>
+        let categories_array = ['Молоко, сыр, яйца', 'Мясная продукция', 'Фрукты, ягоды, бахчевые', 'Полуфабрикаты', 'Консервированные продукты',
+            'Крупы и мука', 'Травы и пряности', 'Грибы', 'Мёд', 'Рыба и морепродукты', 'Кондитерские изделия'];
+        let img_categories_array = ['milk_products', 'meat_products', 'berries', 'semi-finished_products', 'canned_food', 'cereals', 'spices',
+            'mushrooms', 'honey', 'fishes', 'cookies'];
+        let block_category_array = ['DairyProducts', 'MeatProducts', 'FruitsAndBerries', 'SemifinishedProducts', 'CannedFood',
+            'CerealsAndFlour', 'KitchenHerbsAndSpices', 'Mushrooms', 'Honey', 'FishAndSeafood', 'Кондитерские изделия'].map(item => '/Products/List/' + item);
+        for (let i = 0; i < img_categories_array.length; i++) {
+            img_categories_array[i] = 'git/pages/categories_images/' + img_categories_array[i] + '.svg';
+        }
+        let backgroundColor_categories_array = ['#D1DA41', '#F5B925', '#BD4F15', '#BDAF06', '#7F95AC', '#E1C470', '#B45C59', '#F5B925', '#7F95AC',
+            '#BD4F15', '#E1C470', '#BDAF06'];
+        let category_panel = document.querySelector('.category_panel');
+        for (let i = 0; i < categories_array.length; i++) {
+            let block_category = document.createElement('a');
+            let title_category = document.createElement('p');
+            let image_category = document.createElement('img');
+            title_category.textContent = categories_array[i];
+            image_category.src = img_categories_array[i];
+            image_category.id = `img_${i + 1}`;
+            block_category.href = block_category_array[i];
+            block_category.style.backgroundColor = backgroundColor_categories_array[i];
+            block_category.append(title_category);
+            block_category.append(image_category);
+            category_panel.append(block_category);
+        }
+    </script>
+
+    <script src="~/git/for_js_scripts/modal.js"></script>
+    <script>
+        document.querySelector('#search').addEventListener('click', (e) => {
+            if (e.target) {
+                const modal_search = new ItcModal({ kind_of_class: 'search' });
+                modal_search.setBody(`
+                                <form action="" post="get" id="form_search">
+                                    <img src="~/git/for_js_scripts/images_for_js/search.svg">
+                                    <input type="text" id="search_line" name="search_line" placeholder="Найти продукты">
+                                </form>`)
+                modal_search.show();
+            }
+        })
+        document.querySelector('#categories').addEventListener('click', (i) => {
+            if (i.target) {
+                const modal_categories = new ItcModal({ kind_of_class: 'categories' });
+                modal_categories.setBody(
+                    `<table id="table_categories">
+                                        <tr>
+                                            <td><input type="button" value="Все товары" onclick="location.href='/Products/List'"></td>
+                                            <td><input type="button" value="Полуфабрикаты" onclick="location.href='/Products/List/SemifinishedProducts'"></td>
+                                            <td><input type="button" value="Травы и пряности" onclick="location.href='/Products/List/KitchenHerbsAndSpices'"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="button" value="Молоко, яйца, сыр" onclick="location.href='/Products/List/DairyProducts'"></td>
+                                            <td><input type="button" value="Грибы" onclick="location.href='/Products/List/Mushrooms'"></td>
+                                            <td><input type="button" value="Фрукты, ягоды, бахчевые" onclick="location.href='/Products/List/FruitsAndBerries'"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="button" value="Рыба, морепродукты" onclick="location.href='/Products/List/FishAndSeafood'"></td>
+                                            <td><input type="button" value="Мёд" onclick="location.href='/Products/List/Honey'"></td>
+                                            <td><input type="button" value="Крупы, мука" onclick="location.href='/Products/List/CerealsAndFlour'"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="button" value="Мясные продукты" onclick="location.href='/Products/List/MeatProducts'"></td>
+                                            <td><input type="button" value="Консервированные продукты" onclick="location.href='/Products/List/CannedFood'"></td>
+                                            <td><input type="button" value="Кондитерские изделия" onclick="location.href='/Products/List/Confectionery'"></td>
+                                        </tr>
+                            </table>`);
+                modal_categories.show();
+            }
+        })
+    </script>
+</body>
+</html>

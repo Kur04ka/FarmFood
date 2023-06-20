@@ -1,0 +1,86 @@
+﻿@model NewAdvertisementInformationViewModel
+
+<!DOCTYPE html>
+<html lang="en" class="background_personal_profile">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/git/pages/styles/style_personal_profile.css">
+    <link rel="stylesheet" href="~/git/pages/styles/style_new_ad_info.css">
+    <link rel="stylesheet" href="~/git/for_js_scripts/css_for_js/modal_search.css">
+    <link rel="stylesheet" href="~/git/for_js_scripts/css_for_js/modal_categories.css">
+    <link rel="stylesheet" href="~/git/for_js_scripts/css_for_js/modal_successful_creation.css">
+    <link rel="icon" href="~/git/pages/images/farmfood_logo.svg" type="image/x-icon">
+    <title>Создание объявления</title>
+</head>
+<body style="position: absolute;">
+   <div class="init_app_navigation">
+        <div id="website_name" onclick="location.href='/'">Farmfood</div>
+        <div class="panel_app_navigation">
+            <img src="~/git/pages/images/magnifier.png">
+            <input type="button" value="Поиск" id="search">
+            <input type="button" value="Каталог" id="categories">
+            <input type="button" value="Корзина" onclick="location.href='/ShopCart'">
+            <input type="button" value="Личный кабинет" onclick="location.href='/Account/PersonalProfile'">
+        </div>
+        <input id="last_button" type="button" value="Разместить объявление" onclick="location.href='/Products/NewAdvertisementCategory'">
+    </div>
+    <div class="main_panel">
+        <div class="top_panel">
+            <input type="image" src="~/git/pages/images/vector_left_edit_profile.svg">
+            <span>Выбрать категорию товара</span>
+        </div>
+        <div></div>
+        <form class="form_new_ads" asp-controller="Products" asp-action="NewAdvertisementInformation" method="post" enctype="multipart/form-data">
+            <div class="form_section">
+                <div class="name_form_section">
+                    <img src="~/git/pages/images/number_one.svg">
+                    <span>Основная информация</span>
+                </div>
+                <label for="product_name">Название</label>
+                    <input type="text" id="product_name" asp-for="productName" placeholder="Название" required data-filled="true">
+                <label for="product_description">Описание</label>
+                    <textarea id="product_description" asp-for="productDescription" placeholder="Описание" required data-filled="true"></textarea>
+                <label for="product_quantity">Количество товара</label>
+                    <input type="number" id="product_quantity" asp-for="productQuantity" placeholder="Количество товара" min="0" required data-filled="true">
+                <label for="unit_selection">Выберите единицу измерения товара</label>
+                    <select id="unit_selection" asp-for="unitOfMeasure" required data-filled="true">
+                    <optgroup label="Единицы массы">
+                        <option value="г">Грамм</option>
+                        <option value="кг">Килограмм</option>
+                        <option value="т">Тонна</option>
+                    </optgroup>
+                    <optgroup label="Единицы объема">
+                        <option value="л">Литр</option>
+                    </optgroup>
+                    <optgroup label="Единицы длины">
+                        <option value="см">Сантиметр</option>
+                        <option value="м">Метр</option>
+                        <option value="км">Километр</option>
+                    </optgroup>
+                </select>
+                <label for="product_price">Стоимость</label>
+                    <input type="number" id="product_price" asp-for="productPrice" placeholder="Стоимость" min="0" required data-filled="true">
+            </div>
+            <div class="form_section">
+                <div class="name_form_section">
+                    <img src="~/git/pages/images/number_two.svg">
+                    <span>Фотографии</span>
+                </div>
+                <input type="file" id="product_images" name="postedFiles" accept="image/png, image/jpeg" onchange="download(this)" multiple>
+                <label class="upload_product_images" for="product_images">
+                    <img src="~/git/pages/images/upload.svg">
+                    <p>Загрузить фотографии</p>
+                </label>
+                <table class="uploaded_product_images"></table>
+            </div>
+            <input class="form_button" type="submit" value="Создать объявление">
+        </form>
+    </div>
+    <script src="~/git/for_js_scripts/data_validity/data_validity_create_new_ad.js"></script>
+    <script src="~/git/for_js_scripts/image_add.js"></script>
+    <script src="~/git/for_js_scripts/modal.js"></script>
+    <script src="~/git/for_js_scripts/create_modal_windows.js"></script>
+</body>
+</html>

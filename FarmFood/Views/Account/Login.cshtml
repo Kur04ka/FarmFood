@@ -1,0 +1,26 @@
+﻿@model FarmFood.ViewModels.Authorization.LoginViewModel
+
+<!DOCTYPE html>
+<html lang="en" class="background_initial_registration">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/git/pages/styles/style_initial_registration.css" rel="stylesheet">
+    <link href="~/git/pages/styles/style_account_login.css" rel="stylesheet">
+    <link rel="icon" href="~/git/pages/images/farmfood_logo.svg" type="image/x-icon">
+    <title>Вход в учетную запись</title>
+</head>
+<body>
+    <form class="form_login" asp-action="Login" asp-controller="Account" asp-anti-forgery="true">
+        <div class="form_text_login">Войти в учетную запись</div>
+        <ul class="form_input_login">
+            <li><input type="email" asp-for="Email" placeholder="Введите адрес электронной почты" required data-filled="false"><span asp-validation-for="Email"/></li>
+            <li><input type="text" asp-for="Password" placeholder="Введите пароль" required data-filled="false"><span asp-validation-for="Password"/></li>
+            <li><input class="form_button" type="submit" value="Войти"></li>
+            <a asp-action ="Register" asp-controller="Account"><input type="button" value="Еще нет учетной записи?"></a>
+        </ul>
+    </form>
+    <script src="~/git/for_js_scripts/data_validity/data_validity_account_login.js"></script>
+</body>
+</html>

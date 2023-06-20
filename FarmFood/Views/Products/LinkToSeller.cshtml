@@ -1,0 +1,82 @@
+﻿@model LinkToSellerViewModel
+
+<!DOCTYPE html>
+<html lang="en" class="background_personal_profile">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="~/git/pages/styles/style_personal_profile.css">
+    <link rel="stylesheet" href="~/git/pages/styles/style_link_to_seller.css">
+    <link rel="stylesheet" href="~/git/for_js_scripts/css_for_js/modal_search.css">
+    <link rel="stylesheet" href="~/git/for_js_scripts/css_for_js/modal_categories.css">
+    <link rel="icon" href="~/git/pages/images/farmfood_logo.svg" type="image/x-icon">
+</head>
+<body style="position: absolute;">
+    <div class="init_app_navigation" style="left: 80px;">
+        <div id="website_name" onclick="location.href='/'">Farmfood</div>
+        <div class="panel_app_navigation">
+            <img src="~/git/pages/images/magnifier.png">
+            <input type="button" value="Поиск" id="search">
+            <input type="button" value="Каталог" id="categories">
+            <input type="button" value="Корзина" onclick="location.href='/ShopCart/Index'">
+            <input type="button" value="Личный кабинет" onclick="location.href='/Account/PersonalProfile'">
+        </div>
+        <input id="last_button" type="button" value="Разместить объявление" onclick="location.href='/Products/NewAdvertisementCategory'">
+    </div>
+    <div class="main_panel">
+        <div class="top_panel">
+            <div class="base_info">
+                <img src="~/git/pages/images/background_profile.jpg">
+                <div>
+                    <img src="~/git/pages/images/avatar.png">
+                    <p>@(Model.user.FirstName + ' ' + Model.user.LastName)</p>
+                </div>
+            </div>
+            <div class="contacts">
+                <p>Контакты продавца</p>
+                <ul>
+                    <li>
+                        <img src="~/git/pages/images/phone_icon.svg">
+                        <span>@Model.user.PhoneNumber</span>
+                    </li>
+                    <li>
+                        <img src="~/git/pages/images/email_icon.svg">
+                        <a href="mailto:@Model.user.Email">@Model.user.Email</a>
+                    </li>
+                    <li>
+                        <img src="~/git/pages/images/whatsapp_icon.svg">
+                        <a href="https://wa.me/@Model.user.WhatsApp">WhatsApp</a>
+                    </li>
+                    <li>
+                        <img src="~/git/pages/images/vk_icon.svg">
+                        <a href="@Model.user.VKontakte">Вконтакте</a>
+                    </li>
+                    <li>
+                        <img src="~/git/pages/images/telegram_icon.svg">
+                        <a href="@Model.user.Telegram">Telegram</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <h2 class="ad_title">Объявления продавца</h2>
+        <div class="ads">
+            @{
+                foreach(var item in Model.products){
+                    <div class="ad">
+                        <div class="ad_info">
+                            <p>@item.name</p>
+                            <p>@item.price руб/кг</p>
+                            <p>@item.dateOfRegistration</p>
+                        </div>
+                        <img src="@item.img">
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <script src="~/git/for_js_scripts/modal.js"></script>
+    <script src="~/git/for_js_scripts/create_modal_windows.js"></script>
+</body>
+</html>

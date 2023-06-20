@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="background_personal_profile">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/git/pages/styles/style_personal_profile.css">
+    <link rel="stylesheet" href="~/git/pages/styles/style_my_ads.css">
+    <link rel="stylesheet" href="~/git/pages/styles/style_empty_my_ads.css">
+    <link rel="stylesheet" href="~/git/for_js_scripts/css_for_js/modal_search.css">
+    <link rel="stylesheet" href="~/git/for_js_scripts/css_for_js/modal_categories.css">
+    <link rel="icon" href="~/git/pages/images/farmfood_logo.svg" type="image/x-icon">
+    <title>Мои объявления</title>
+</head>
+<body style="position: absolute;">
+    <div class="init_app_navigation" style="left: 100px;">
+        <div id="website_name" onclick="location.href='/'">Farmfood</div>
+        <div class="panel_app_navigation">
+            <img src="~/git/pages/images/magnifier.png">
+            <input type="button" value="Поиск" id="search">
+            <input type="button" value="Каталог" id="categories">
+            <input type="button" value="Корзина" onclick="location.href='/ShopCart/Index'">
+            <input type="button" value="Личный кабинет" onclick="location.href='/Account/PersonalProfile'">
+        </div>
+        <input id="last_button" type="button" value="Разместить объявление" onclick="location.href='/Products/NewAdvertisementCategory'">
+    </div>
+    <div class="main_panel">
+        <div class="title_panel">
+            <div>Мои объявления</div>
+        </div>
+        <h2>У вас еще нет объявлений</h2>
+        <input type="button" value="Создать объявление" onclick="location.href='/Products/NewAdvertisementCategory'">
+    </div>
+    <script src="~/git/for_js_scripts/modal.js"></script>
+    <script src="~/git/for_js_scripts/create_modal_windows.js"></script>
+</body>
+</html>
